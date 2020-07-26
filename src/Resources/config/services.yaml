@@ -1,1 +1,6 @@
 services:
+  Dev\Krsk\FileManager\Controller\:
+    resource: '../../Controller'
+    autowire: true
+    public: true
+    tags: ['container.service_subscriber']

@@ -1,0 +1,4 @@
+dev_krsk_file_manager:
+  resource: ../../Controller/
+  name_prefix: dev_krsk_file_manager_
+  type: annotation
