@@ -21,7 +21,10 @@ class IndexController extends AbstractController
      */
     public function indexAction($project = 'default'): Response
     {
-        //$this->denyAccessUnlessGranted(sprintf(self::VIEW, $project));
+        $projects = $this->getDoctrine()
+            ->getManager($this->getParameter('dev_krsk_file_manager.em'))
+            ->getRepository($this->getParameter('dev_krsk_file_manager.directory_class'))
+            ->findAll();
 
         return $this->render('@DevKrskFileManager/index.html.twig');
     }

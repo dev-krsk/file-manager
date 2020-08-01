@@ -19,5 +19,12 @@ class DevKrskFileManagerExtension extends Extension
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('services.yaml');
+
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('dev_krsk_file_manager.em', $config['em']);
+        $container->setParameter('dev_krsk_file_manager.directory_class', $config['directory_class']);
+        $container->setParameter('dev_krsk_file_manager.file_class', $config['file_class']);
     }
 }

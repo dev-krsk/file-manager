@@ -13,6 +13,20 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        return new TreeBuilder('dev_krsk_file_manager');
+        $treeBuilder = new TreeBuilder('dev_krsk_file_manager');
+        $treeBuilder
+            ->getRootNode()
+                ->children()
+                    ->scalarNode('em')
+                        ->isRequired()
+                    ->end()
+                    ->scalarNode('directory_class')
+                        ->isRequired()
+                    ->end()
+                    ->scalarNode('file_class')
+                        ->isRequired()
+                    ->end()
+                ->end();
+        return $treeBuilder;
     }
 }

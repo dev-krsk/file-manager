@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Dev\Krsk\FileManager\Entity;
 
 use DateTimeImmutable;
@@ -9,70 +10,52 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
  */
-class Superclass
+abstract class AbstractSuperClass
 {
     /**
      * @var DateTimeImmutable - Дата создания
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false, options={"comment":"Дата создания"})
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var string|null - Причина создания
-     *
-     * @ORM\Column(name="created_reason", type="string", length=255, nullable=true, options={"comment":"Причина создания"})
      */
-    private $createdReason;
+    protected $createdReason;
 
     /**
      * @var string - Пользователь создавший
-     *
-     * @ORM\Column(name="created_user", type="string", length=255, nullable=false, options={"comment":"Пользователь создавший"})
      */
-    private $createdUser;
+    protected $createdUser;
 
     /**
      * @var DateTimeImmutable|null - Дата изменения
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true, options={"comment":"Дата изменения"})
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @var string|null - Причина изменения
-     *
-     * @ORM\Column(name="updated_reason", type="string", length=255, nullable=true, options={"comment":"Причина изменения"})
      */
-    private $updatedReason;
+    protected $updatedReason;
 
     /**
      * @var string|null - Пользователь изменивший
-     *
-     * @ORM\Column(name="updated_user", type="string", length=255, nullable=true, options={"comment":"Пользователь изменивший"})
      */
-    private $updatedUser;
+    protected $updatedUser;
 
     /**
      * @var DateTimeImmutable|null - Дата удаления
-     *
-     * @ORM\Column(name="deleted_at", type="datetime", nullable=true, options={"comment":"Дата удаления"})
      */
-    private $deletedAt;
+    protected $deletedAt;
 
     /**
      * @var string|null - Причина удаления
-     *
-     * @ORM\Column(name="deleted_reason", type="string", length=255, nullable=true, options={"comment":"Причина удаления"})
      */
-    private $deletedReason;
+    protected $deletedReason;
 
     /**
      * @var string|null - Пользователь удаливший
-     *
-     * @ORM\Column(name="deleted_user", type="string", length=255, nullable=true, options={"comment":"Пользователь удаливший"})
      */
-    private $deletedUser;
+    protected $deletedUser;
 
     /**
      * @return DateTimeImmutable
@@ -83,13 +66,14 @@ class Superclass
     }
 
     /**
+     * @param DateTimeImmutable|null $createdAt
      * @return self
      *
      * @ORM\PrePersist
      */
-    public function setCreatedAt(): self
+    public function setCreatedAt(?DateTimeImmutable $createdAt = null): self
     {
-        $this->createdAt = new DateTimeImmutable();
+        $this->createdAt = $createdAt ?? new DateTimeImmutable();
         return $this;
     }
 
@@ -138,13 +122,14 @@ class Superclass
     }
 
     /**
+     * @param DateTimeImmutable|null $updatedAt
      * @return self
      *
      * @ORM\PreUpdate
      */
-    public function setUpdatedAt(): self
+    public function setUpdatedAt(?DateTimeImmutable $updatedAt = null): self
     {
-        $this->updatedAt = new DateTimeImmutable();
+        $this->updatedAt = $updatedAt ?? new DateTimeImmutable();
         return $this;
     }
 
@@ -193,13 +178,14 @@ class Superclass
     }
 
     /**
+     * @param DateTimeImmutable|null $deletedAt
      * @return self
      *
      * @ORM\PreRemove
      */
-    public function setDeletedAt(): self
+    public function setDeletedAt(?DateTimeImmutable $deletedAt = null): self
     {
-        $this->deletedAt = new DateTimeImmutable();
+        $this->deletedAt = $deletedAt ?? new DateTimeImmutable();
         return $this;
     }
 
