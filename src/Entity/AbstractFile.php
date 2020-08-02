@@ -5,6 +5,8 @@ namespace Dev\Krsk\FileManager\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ *
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks
  */

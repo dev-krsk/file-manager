@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ */
 class IndexController extends AbstractController
 {
     public const MODULE = 'DEV_KRSK_FILE_MANAGER_';

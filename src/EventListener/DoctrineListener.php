@@ -1,22 +1,24 @@
 <?php
 
-
 namespace Dev\Krsk\FileManager\EventListener;
 
-
 use Dev\Krsk\FileManager\Entity\AbstractDirectory;
-use Dev\Krsk\FileManager\Entity\DirectoryTrait;
 use Dev\Krsk\FileManager\Entity\AbstractFile;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Event\OnClassMetadataNotFoundEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
+/**
+ * Класс DoctrineListener предназначен для подмены абстрактных классов бандла в аннотациях доктрины,
+ * на классы, реализованные разработчиком в конечном продукте.
+ *
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ */
 class DoctrineListener
 {
     protected $resolveTargetEntities;
 
     /**
-     * LoadMetadata constructor.
      * @param $fileRepository
      * @param $directoryRepository
      */
@@ -29,7 +31,10 @@ class DoctrineListener
         $this->resolveTargetEntities[ltrim(AbstractDirectory::class, "\\")] = $mapping;
     }
 
-    public function loadClassMetadata(LoadClassMetadataEventArgs $args)
+    /**
+     * @param LoadClassMetadataEventArgs $args
+     */
+    public function loadClassMetadata(LoadClassMetadataEventArgs $args): void
     {
         $cm = $args->getClassMetadata();
 
@@ -46,7 +51,10 @@ class DoctrineListener
         }
     }
 
-    public function onClassMetadataNotFound(OnClassMetadataNotFoundEventArgs $args)
+    /**
+     * @param OnClassMetadataNotFoundEventArgs $args
+     */
+    public function onClassMetadataNotFound(OnClassMetadataNotFoundEventArgs $args): void
     {
         if (array_key_exists($args->getClassName(), $this->resolveTargetEntities)) {
             $args->setFoundMetadata(
@@ -60,10 +68,8 @@ class DoctrineListener
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadataInfo $classMetadata
      * @param array                                   $mapping
-     *
-     * @return void
      */
-    private function remapAssociation($classMetadata, $mapping)
+    private function remapAssociation($classMetadata, $mapping): void
     {
         $newMapping = $this->resolveTargetEntities[$mapping['targetEntity']];
         $newMapping = array_replace_recursive($mapping, $newMapping);

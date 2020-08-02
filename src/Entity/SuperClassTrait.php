@@ -6,6 +6,9 @@ namespace Dev\Krsk\FileManager\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ */
 trait SuperClassTrait
 {
     /**
@@ -82,8 +85,6 @@ trait SuperClassTrait
     /**
      * @param DateTimeImmutable|null $createdAt
      * @return self
-     *
-     * @ORM\PrePersist
      */
     public function setCreatedAt(?DateTimeImmutable $createdAt = null): self
     {
@@ -138,8 +139,6 @@ trait SuperClassTrait
     /**
      * @param DateTimeImmutable|null $updatedAt
      * @return self
-     *
-     * @ORM\PreUpdate
      */
     public function setUpdatedAt(?DateTimeImmutable $updatedAt = null): self
     {
@@ -194,8 +193,6 @@ trait SuperClassTrait
     /**
      * @param DateTimeImmutable|null $deletedAt
      * @return self
-     *
-     * @ORM\PreRemove
      */
     public function setDeletedAt(?DateTimeImmutable $deletedAt = null): self
     {

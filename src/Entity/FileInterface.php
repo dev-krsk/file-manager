@@ -1,9 +1,10 @@
 <?php
 
-
 namespace Dev\Krsk\FileManager\Entity;
 
-
+/**
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ */
 interface FileInterface extends SuperClassInterface
 {
     /**

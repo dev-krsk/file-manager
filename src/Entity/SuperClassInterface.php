@@ -3,8 +3,10 @@
 namespace Dev\Krsk\FileManager\Entity;
 
 use DateTimeImmutable;
-use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ */
 interface SuperClassInterface
 {
     /**
@@ -15,8 +17,6 @@ interface SuperClassInterface
     /**
      * @param DateTimeImmutable|null $createdAt
      * @return self
-     *
-     * @ORM\PrePersist
      */
     public function setCreatedAt(?DateTimeImmutable $createdAt = null): self;
 
@@ -50,8 +50,6 @@ interface SuperClassInterface
     /**
      * @param DateTimeImmutable|null $updatedAt
      * @return self
-     *
-     * @ORM\PreUpdate
      */
     public function setUpdatedAt(?DateTimeImmutable $updatedAt = null): self;
 
@@ -85,8 +83,6 @@ interface SuperClassInterface
     /**
      * @param DateTimeImmutable|null $deletedAt
      * @return self
-     *
-     * @ORM\PreRemove
      */
     public function setDeletedAt(?DateTimeImmutable $deletedAt = null): self;
 

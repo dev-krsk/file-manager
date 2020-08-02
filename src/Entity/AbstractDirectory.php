@@ -1,11 +1,12 @@
 <?php
 
-
 namespace Dev\Krsk\FileManager\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @author Yuriy Yurinskiy <yuriyyurinskiy@yandex.ru>
+ *
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks
  */
@@ -44,9 +45,6 @@ abstract class AbstractDirectory implements DirectoryInterface
      */
     protected $directory;
 
-    /**
-     * AbstractDirectory constructor.
-     */
     public function __construct()
     {
         $this->directory = null;
