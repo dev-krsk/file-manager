@@ -10,3 +10,10 @@ services:
     tags:
       - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
       - { name: 'doctrine.event_listener', event: 'onClassMetadataNotFound' }
+
+  Dev\Krsk\FileManager\EventListener\SuperClassSubscriber:
+    arguments: ['@security.token_storage']
+    tags:
+      - { name: 'doctrine.event_listener', event: prePersist }
+      - { name: 'doctrine.event_listener', event: preUpdate }
+      - { name: 'doctrine.event_listener', event: preRemove }

@@ -2,6 +2,7 @@
 
 namespace Dev\Krsk\FileManager\Controller;
 
+use Dev\Krsk\FileManager\Entity\AbstractDirectory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +29,15 @@ class IndexController extends AbstractController
             ->getManager($this->getParameter('dev_krsk_file_manager.em'))
             ->getRepository($this->getParameter('dev_krsk_file_manager.directory_class'))
             ->findAll();
+
+        $type = $this->getParameter('dev_krsk_file_manager.directory_class');
+
+        /** @var AbstractDirectory $p */
+        $p = new $type;
+        $p->setName('Тестирование');
+        $p->setAlias('test');
+        $this->getDoctrine()->getManager($this->getParameter('dev_krsk_file_manager.em'))->persist($p);
+        //$this->getDoctrine()->getManager($this->getParameter('dev_krsk_file_manager.em'))->flush();
 
         return $this->render('@DevKrskFileManager/index.html.twig');
     }

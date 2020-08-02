@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait SuperClassTrait
 {
     /**
-     * @var DateTimeImmutable - Дата создания
+     * @var DateTimeImmutable|null - Дата создания
      *
      * @ORM\Column(name="created_at", type="datetime_immutable", options={"comment": "Дата создания"})
      */
@@ -75,9 +75,9 @@ trait SuperClassTrait
     protected $deletedUser;
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTimeImmutable|null
      */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -111,9 +111,9 @@ trait SuperClassTrait
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreatedUser(): string
+    public function getCreatedUser(): ?string
     {
         return $this->createdUser;
     }

@@ -10,9 +10,9 @@ use DateTimeImmutable;
 interface SuperClassInterface
 {
     /**
-     * @return DateTimeImmutable
+     * @return DateTimeImmutable|null
      */
-    public function getCreatedAt(): DateTimeImmutable;
+    public function getCreatedAt(): ?DateTimeImmutable;
 
     /**
      * @param DateTimeImmutable|null $createdAt
@@ -32,9 +32,9 @@ interface SuperClassInterface
     public function setCreatedReason(?string $createdReason): self;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreatedUser(): string;
+    public function getCreatedUser(): ?string;
 
     /**
      * @param string $createdUser
