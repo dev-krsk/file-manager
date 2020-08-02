@@ -3,15 +3,16 @@
 
 namespace Dev\Krsk\FileManager\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass()
+ * @ORM\HasLifecycleCallbacks
  */
 abstract class AbstractDirectory implements DirectoryInterface
 {
+    use SuperClassTrait;
+
     /**
      * @var integer - Идентификатор
      *
@@ -38,24 +39,10 @@ abstract class AbstractDirectory implements DirectoryInterface
     /**
      * @var AbstractDirectory|null - Родительская папка
      *
-     * @ORM\ManyToOne(targetEntity="Dev\Krsk\FileManager\Entity\AbstractDirectory", inversedBy="directories")
+     * @ORM\ManyToOne(targetEntity="Dev\Krsk\FileManager\Entity\AbstractDirectory")
      * @ORM\JoinColumn(fieldName="directory_id", referencedColumnName="id", nullable=true)
      */
     protected $directory;
-
-    /**
-     * @var ArrayCollection - Папки в директории
-     *
-     * @ORM\OneToMany(targetEntity="Dev\Krsk\FileManager\Entity\AbstractDirectory", mappedBy="directory")
-     */
-    protected $directories;
-
-    /**
-     * @var ArrayCollection - Файлы в директории
-     *
-     * @ORM\OneToMany(targetEntity="Dev\Krsk\FileManager\Entity\AbstractFile", mappedBy="directory")
-     */
-    protected $files;
 
     /**
      * AbstractDirectory constructor.
@@ -63,8 +50,6 @@ abstract class AbstractDirectory implements DirectoryInterface
     public function __construct()
     {
         $this->directory = null;
-        $this->directories = new ArrayCollection();
-        $this->files = new ArrayCollection();
     }
 
     /**
@@ -122,58 +107,20 @@ abstract class AbstractDirectory implements DirectoryInterface
     }
 
     /**
-     * @return AbstractDirectory|null
+     * @return DirectoryInterface|null
      */
-    public function getDirectory(): ?AbstractDirectory
+    public function getDirectory(): ?DirectoryInterface
     {
         return $this->directory;
     }
 
     /**
-     * @param AbstractDirectory|null $directory
+     * @param DirectoryInterface|null $directory
      * @return self
      */
-    public function setDirectory(?AbstractDirectory $directory = null): DirectoryInterface
+    public function setDirectory(?DirectoryInterface $directory = null): DirectoryInterface
     {
         $this->directory = $directory;
-        return $this;
-    }
-
-    /**
-     * @return Collection|AbstractFile[]
-     */
-    public function getFiles(): Collection
-    {
-        return $this->files;
-    }
-
-    /**
-     * @param AbstractFile $file
-     * @return self
-     */
-    public function addFile(AbstractFile $file): DirectoryInterface
-    {
-        if (!$this->files->contains($file)) {
-            $this->files[] = $file;
-            $file->setDirectory($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param AbstractFile $product
-     * @return self
-     */
-    public function removeFile(AbstractFile $product): DirectoryInterface
-    {
-        if ($this->files->contains($product)) {
-            $this->files->removeElement($product);
-            if ($product->getDirectory() === $this) {
-                $product->setDirectory(null);
-            }
-        }
-
         return $this;
     }
 }

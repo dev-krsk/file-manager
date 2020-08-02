@@ -6,54 +6,68 @@ namespace Dev\Krsk\FileManager\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\MappedSuperclass
- * @ORM\HasLifecycleCallbacks
- */
-abstract class AbstractSuperClass
+trait SuperClassTrait
 {
     /**
      * @var DateTimeImmutable - Дата создания
+     *
+     * @ORM\Column(name="created_at", type="datetime_immutable", options={"comment": "Дата создания"})
      */
     protected $createdAt;
 
     /**
      * @var string|null - Причина создания
+     *
+     * @ORM\Column(name="created_reason", type="string", length=255, nullable=true, options={"comment": "Причина создания"})
      */
     protected $createdReason;
 
     /**
      * @var string - Пользователь создавший
+     *
+     * @ORM\Column(name="created_user", type="string", length=100, options={"comment": "Пользователь создавший"})
      */
     protected $createdUser;
 
     /**
      * @var DateTimeImmutable|null - Дата изменения
+     *
+     * @ORM\Column(name="updated_at", type="datetime_immutable", nullable=true, options={"comment": "Дата изменения"})
      */
     protected $updatedAt;
 
     /**
      * @var string|null - Причина изменения
+     *
+     * @ORM\Column(name="updated_reason", type="string", length=255, nullable=true, options={"comment": "Причина изменения"})
      */
     protected $updatedReason;
 
     /**
      * @var string|null - Пользователь изменивший
+     *
+     * @ORM\Column(name="updated_user", type="string", length=100, nullable=true, options={"comment": "Пользователь изменивший"})
      */
     protected $updatedUser;
 
     /**
      * @var DateTimeImmutable|null - Дата удаления
+     *
+     * @ORM\Column(name="deleted_at", type="datetime_immutable", nullable=true, options={"comment": "Дата удаления"})
      */
     protected $deletedAt;
 
     /**
      * @var string|null - Причина удаления
+     *
+     * @ORM\Column(name="deleted_reason", type="string", length=255, nullable=true, options={"comment": "Причина удаления"})
      */
     protected $deletedReason;
 
     /**
      * @var string|null - Пользователь удаливший
+     *
+     * @ORM\Column(name="deleted_user", type="string", length=100, nullable=true, options={"comment": "Пользователь удаливший"})
      */
     protected $deletedUser;
 

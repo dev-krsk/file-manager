@@ -2,9 +2,7 @@
 
 namespace Dev\Krsk\FileManager\Entity;
 
-use Doctrine\Common\Collections\Collection;
-
-interface DirectoryInterface
+interface DirectoryInterface extends SuperClassInterface
 {
     /**
      * @return int
@@ -40,30 +38,13 @@ interface DirectoryInterface
     public function setAlias(string $alias): DirectoryInterface;
 
     /**
-     * @return AbstractDirectory|null
+     * @return DirectoryInterface|null
      */
-    public function getDirectory(): ?AbstractDirectory;
+    public function getDirectory(): ?DirectoryInterface;
 
     /**
-     * @param AbstractDirectory|null $directory
+     * @param DirectoryInterface|null $directory
      * @return self
      */
-    public function setDirectory(?AbstractDirectory $directory = null): DirectoryInterface;
-
-    /**
-     * @return Collection|AbstractFile[]
-     */
-    public function getFiles(): Collection;
-
-    /**
-     * @param AbstractFile $file
-     * @return self
-     */
-    public function addFile(AbstractFile $file): DirectoryInterface;
-
-    /**
-     * @param AbstractFile $product
-     * @return self
-     */
-    public function removeFile(AbstractFile $product): DirectoryInterface;
+    public function setDirectory(?DirectoryInterface $directory = null): DirectoryInterface;
 }

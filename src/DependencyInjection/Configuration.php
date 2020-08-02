@@ -18,13 +18,17 @@ class Configuration implements ConfigurationInterface
             ->getRootNode()
                 ->children()
                     ->scalarNode('em')
+                        ->defaultValue('default')
                         ->isRequired()
+                        ->cannotBeEmpty()
                     ->end()
                     ->scalarNode('directory_class')
                         ->isRequired()
+                        ->cannotBeEmpty()
                     ->end()
                     ->scalarNode('file_class')
                         ->isRequired()
+                        ->cannotBeEmpty()
                     ->end()
                 ->end();
         return $treeBuilder;

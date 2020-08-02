@@ -4,3 +4,9 @@ services:
     autowire: true
     public: true
     tags: ['container.service_subscriber']
+
+  Dev\Krsk\FileManager\EventListener\DoctrineListener:
+    arguments: ['%dev_krsk_file_manager.file_class%', '%dev_krsk_file_manager.directory_class%']
+    tags:
+      - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
+      - { name: 'doctrine.event_listener', event: 'onClassMetadataNotFound' }

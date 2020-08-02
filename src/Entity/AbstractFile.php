@@ -6,9 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass()
+ * @ORM\HasLifecycleCallbacks
  */
 abstract class AbstractFile implements FileInterface
 {
+    use SuperClassTrait;
+
     /**
      * @var integer - Идентификатор
      *
@@ -28,7 +31,7 @@ abstract class AbstractFile implements FileInterface
     /**
      * @var AbstractDirectory - Папка
      *
-     * @ORM\ManyToOne(targetEntity="Dev\Krsk\FileManager\Entity\AbstractDirectory", inversedBy="files")
+     * @ORM\ManyToOne(targetEntity="Dev\Krsk\FileManager\Entity\AbstractDirectory")
      * @ORM\JoinColumn(fieldName="directory_id", referencedColumnName="id", nullable=false)
      */
     protected $directory;
@@ -70,18 +73,18 @@ abstract class AbstractFile implements FileInterface
     }
 
     /**
-     * @return AbstractDirectory|null
+     * @return DirectoryInterface|null
      */
-    public function getDirectory(): ?AbstractDirectory
+    public function getDirectory(): ?DirectoryInterface
     {
         return $this->directory;
     }
 
     /**
-     * @param AbstractDirectory|null $directory
+     * @param DirectoryInterface|null $directory
      * @return self
      */
-    public function setDirectory(?AbstractDirectory $directory): FileInterface
+    public function setDirectory(?DirectoryInterface $directory): FileInterface
     {
         $this->directory = $directory;
 

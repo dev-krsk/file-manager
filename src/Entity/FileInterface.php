@@ -4,7 +4,7 @@
 namespace Dev\Krsk\FileManager\Entity;
 
 
-interface FileInterface
+interface FileInterface extends SuperClassInterface
 {
     /**
      * @return int
@@ -29,13 +29,13 @@ interface FileInterface
     public function setName(string $name): FileInterface;
 
     /**
-     * @return AbstractDirectory|null
+     * @return DirectoryInterface|null
      */
-    public function getDirectory(): ?AbstractDirectory;
+    public function getDirectory(): ?DirectoryInterface;
 
     /**
-     * @param AbstractDirectory|null $directory
+     * @param DirectoryInterface|null $directory
      * @return $this
      */
-    public function setDirectory(?AbstractDirectory $directory): FileInterface;
+    public function setDirectory(?DirectoryInterface $directory): FileInterface;
 }
